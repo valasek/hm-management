@@ -40,7 +40,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import { useStore } from "vuex";
+import { key } from "../store";
 import HwDetail from "./HwDetail.vue";
 
 export default defineComponent({
@@ -48,38 +50,19 @@ export default defineComponent({
   components: { HwDetail },
   props: {},
   setup() {
+    const store = useStore(key);
     const showModal = ref(false);
     const selectedHW = ref("");
-    const loading = ref(false);
+    const loading = computed(() => store.state.loading);
     const error = ref(null);
-    const items = ref([
-      {
-        id: 1234,
-        type: "Notebook",
-        department: "DeOps",
-        user: "Stanislav Valasek"
-      },
-      {
-        id: 1235,
-        type: "Notebook",
-        department: "DeOps",
-        user: "Stanislav Valasek"
-      }
-    ]);
+
+    const items = computed(() => store.state.items);
+
+    store.dispatch("getAllItems");
+
     function showDetail(id: string) {
       selectedHW.value = id;
       showModal.value = true;
-    }
-    // call API
-    async function getItems() {
-      console.log("getItems");
-      try {
-        // items.value = await getAllHW();
-        await new Promise(r => setTimeout(r, 2000));
-        loading.value = false;
-      } catch (err) {
-        error.value = err;
-      }
     }
 
     return {
@@ -89,7 +72,6 @@ export default defineComponent({
       showDetail,
       loading,
       error,
-      getItems
     };
   }
 });
