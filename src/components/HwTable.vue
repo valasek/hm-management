@@ -1,6 +1,10 @@
 <template>
   <div class="mt-8">
-    <table class="table-fixed divide-y w-full">
+    <div v-if="loading">
+      Loading...
+      <p v-if="error">{{ error }}</p>
+    </div>
+    <table v-else class="table-fixed divide-y w-full">
       <thead>
         <tr>
           <th class="w-1/4">ID</th>
@@ -10,15 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-if="error">
-          {{
-            error
-          }}
-        </tr>
-        <tr v-if="loading">
-          Loading...
-        </tr>
-        <tr v-else v-for="item in items" :key="item.id" class="text-center">
+        <tr v-for="item in items" :key="item.id" class="text-center">
           <td
             class="hover:underline cursor-pointer text-green-500"
             @click="showDetail(item.id)"
@@ -383,16 +379,18 @@ export default defineComponent({
       console.log("after", selectedHW.value);
     }
     // call API
-    // async function getItems() {
-    //   try {
-    //     items.value = await getAllHW();
-    //     loading.value = false
-    //   } catch (err) {
-    //     error.value = err;
-    //   }
-    // }
+    async function getItems() {
+      console.log("getItems");
+      try {
+        // items.value = await getAllHW();
+        await new Promise(r => setTimeout(r, 2000));
+        loading.value = false;
+      } catch (err) {
+        error.value = err;
+      }
+    }
 
-    return { showModal, items, showDetail, loading, error };
+    return { showModal, items, showDetail, loading, error, getItems };
   }
 });
 </script>
