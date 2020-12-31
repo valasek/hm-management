@@ -4,13 +4,13 @@
       Loading...
       <p v-if="error">{{ error }}</p>
     </div>
-    <table v-else class="table-fixed divide-y w-full">
+    <table v-else class="table-fixed divide-y w-full border rounded shadow-2xl">
       <thead class="bg-gray-300">
-        <tr>
-          <th class="w-1/4">ID</th>
-          <th class="w-1/4">Zařízení</th>
-          <th class="w-1/4">Primariát</th>
-          <th class="w-1/4">Uživatel</th>
+        <tr class="">
+          <th class="w-1/4 text-lg pt-2 pb-2">ID</th>
+          <th class="w-1/4 text-lg pt-2 pb-2">Zařízení</th>
+          <th class="w-1/4 text-lg pt-2 pb-2">Primariát</th>
+          <th class="w-1/4 text-lg pt-2 pb-2">Uživatel</th>
         </tr>
       </thead>
       <tbody class="divide-y">

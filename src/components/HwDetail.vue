@@ -6,7 +6,7 @@
       <div class="bg-white w-full rounded shadow-2xl">
         <div class="p-6">
           <div class="text-left pb-2 pl-2"># {{ hwId }}</div>
-          <div class="bg-red rounded-lg border-solid border-2 border-gray-600">
+          <div class="bg-red rounded-lg border-solid border-2 border-gray-400">
             <div>
               <div
                 class="flex items-center justify-between bg-gray-200 pl-3 pr-2 py-3 w-full rounded-lg text-gray-600 font-bold hover:bg-gray-300"
