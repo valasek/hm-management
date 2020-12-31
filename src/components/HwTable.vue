@@ -56,7 +56,7 @@ export default defineComponent({
     const loading = computed(() => store.state.loading);
     const error = ref(null);
 
-    const items = computed(() => store.state.items);
+    const items = computed(() => store.state.selectedItems);
 
     store.dispatch("getAllItems");
 
@@ -71,7 +71,7 @@ export default defineComponent({
       items,
       showDetail,
       loading,
-      error,
+      error
     };
   }
 });

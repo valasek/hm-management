@@ -1,8 +1,11 @@
 import { InjectionKey } from "vue";
 import { createStore, Store } from "vuex";
 
+type HWList = { id: string; type: string; department: string; user: string };
+
 export interface State {
-  items: Array<{ id: string; type: string; department: string; user: string }>;
+  items: Array<HWList>;
+  selectedItems: Array<HWList>;
   loading: boolean;
 }
 
@@ -15,15 +18,17 @@ function sleep(ms: number) {
 export const store = createStore<State>({
   state: {
     items: [],
+    selectedItems: [],
     loading: true
   },
   mutations: {
     toggleLoading(state) {
-      console.log("toggleLoading");
       state.loading = !state.loading;
     },
+    filterItems(state, items) {
+      state.selectedItems = items;
+    },
     setAllItems(state, items) {
-      console.log("setAllItems");
       state.items = items;
     }
   },
@@ -31,8 +36,30 @@ export const store = createStore<State>({
     toggleLoading(context) {
       context.commit("toggleLoading");
     },
+    filterItems(context, searchInput) {
+      if (searchInput === "") {
+        context.commit("filterItems", context.state.items);
+      } else {
+        const items = context.state.items.filter(function(el) {
+          return (
+            el.user.toLowerCase().includes(searchInput.toLowerCase()) ||
+            el.type.toLowerCase().includes(searchInput.toLowerCase()) ||
+            el.department.toLowerCase().includes(searchInput.toLowerCase())
+          );
+        });
+
+        // const items = [
+        //   {
+        //     id: 1,
+        //     type: "Adaptér",
+        //     department: "Klinika",
+        //     user: "Barbora Korandová"
+        //   }
+        // ];
+        context.commit("filterItems", items);
+      }
+    },
     async getAllItems(context) {
-      console.log("getAllItems");
       await sleep(1500);
       const items = [
         {
@@ -86,6 +113,7 @@ export const store = createStore<State>({
       ];
       context.commit("toggleLoading");
       context.commit("setAllItems", items);
+      context.commit("filterItems", items);
 
       // try {
       //   // items.value = await getAllHW();

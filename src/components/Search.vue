@@ -25,9 +25,30 @@
         class="py-2 text-sm text-white bg-gray-900 hover:bg-gray-100 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
         placeholder="Hledat..."
         autocomplete="off"
+        v-model="searchInput"
       />
     </div>
   </form>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+import { defineComponent, ref, watchEffect } from "vue";
+import { useStore } from "vuex";
+import { key } from "../store";
+
+export default defineComponent({
+  name: "Search",
+  props: {},
+  setup() {
+    const store = useStore(key);
+    const searchInput = ref("");
+
+    watchEffect(() => store.dispatch("filterItems", searchInput.value));
+
+    return { searchInput };
+  }
+});
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped></style>
