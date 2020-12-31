@@ -299,7 +299,7 @@
         <div class="flex justify-center">
           <div>
             <button
-              class="justify-self-center rounded bg-gray-500 px-8 mb-6 py-2 text-white"
+              class="justify-self-center rounded bg-gray-500 hover:bg-gray-700 px-8 mb-6 py-2 text-white"
               @click="$emit('closedetail')"
             >
               OK

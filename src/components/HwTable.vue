@@ -6,24 +6,24 @@
     </div>
     <table v-else class="table-fixed divide-y w-full border rounded shadow-2xl">
       <thead class="bg-gray-300">
-        <tr class="">
-          <th class="w-1/4 text-lg pt-2 pb-2">ID</th>
-          <th class="w-1/4 text-lg pt-2 pb-2">Zařízení</th>
-          <th class="w-1/4 text-lg pt-2 pb-2">Primariát</th>
-          <th class="w-1/4 text-lg pt-2 pb-2">Uživatel</th>
+        <tr class="text-left">
+          <th class="w-1/4 text-lg pl-8 pt-2 pb-2">ID</th>
+          <th class="w-1/4 text-lg pl-8 pt-2 pb-2">Zařízení</th>
+          <th class="w-1/4 text-lg pl-8 pt-2 pb-2">Primariát</th>
+          <th class="w-1/4 text-lg pl-8 pt-2 pb-2">Uživatel</th>
         </tr>
       </thead>
       <tbody class="divide-y">
-        <tr v-for="item in items" :key="item.id" class="text-center">
+        <tr v-for="item in items" :key="item.id" class="text-left">
           <td
-            class="hover:underline cursor-pointer text-green-500"
+            class="hover:underline cursor-pointer text-green-500 pl-8"
             @click="showDetail(item.id)"
           >
             # {{ item.id }}
           </td>
-          <td>{{ item.type }}</td>
-          <td>{{ item.department }}</td>
-          <td>{{ item.user }}</td>
+          <td class="pl-8">{{ item.type }}</td>
+          <td class="pl-8">{{ item.department }}</td>
+          <td class="pl-8">{{ item.user }}</td>
         </tr>
       </tbody>
     </table>
