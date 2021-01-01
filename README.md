@@ -1,24 +1,17 @@
-# spa
+mutation create {
+  create(
+    input:{id:"10",type:"notebook",manufacturer:"Dell",series:"series",serialNumber:"serialNuber",bought:"leden",warrantyExpires:"unor",user:"Stanislav",department:"devul"})
+  {
+  	id
+	}
+}
 
-## Project setup
-```
-yarn install
-```
+query getHw {
+  getHw {
+    id,type,manufacturer,series,serialNumber,bought,warrantyExpires,user,department
+  }
+}
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+go run github.com/99designs/gqlgen generate
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+go run github.com/99designs/gqlgen init

@@ -1,0 +1,38 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+scalar Date
+
+type Hw {
+  id: ID!
+  type: String!
+  manufacturer: String!
+  series: String!
+  serialNumber: String!
+  bought: Date!
+  warrantyExpires: Date!
+  user: String
+  department: String
+}
+
+type Query {
+  getHw: [Hw!]!
+}
+
+input hwItem {
+  id: ID!
+  type: String!
+  manufacturer: String!
+  series: String!
+  serialNumber: String!
+  bought: Date!
+  warrantyExpires: Date!
+  user: String
+  department: String
+}
+
+type Mutation {
+  create(input: hwItem!): Hw!
+  remove(input: hwItem!): Hw!
+}
